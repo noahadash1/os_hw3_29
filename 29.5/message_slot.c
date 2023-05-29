@@ -21,8 +21,7 @@ MODULE_LICENSE("GPL");
 static channelList massageSlotsDeviceFilesList[257]; //256 + one for the end of the array sing 
 
 //================== DEVICE FUNCTIONS ===========================
-static int device_open( struct inode* inode,
-                        struct file*  file )
+static int device_open( struct inode *inode, nstruct file *file )
 {
   printf(":)");
   return SUCCESS;
@@ -78,7 +77,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
 }
 
 //---------------------------------------------------------------
-static ssize_t device_write(struct file* file, const char __user* buffer, size_t length, loff_t*  offset)
+static ssize_t device_write(struct file *file, const char __user *buffer, size_t length, loff_t *offset)
 {
   channel *currentChannel = (channel *)file->private_data;
   char mid_message[BUF_LEN];
@@ -111,7 +110,7 @@ static ssize_t device_write(struct file* file, const char __user* buffer, size_t
 //---------------------------------------------------------------
 // a process which has already opened
 // the device file attempts to read from it
-static ssize_t device_read( struct file* file, char __user* buffer, size_t length, loff_t* offset)
+static ssize_t device_read( struct file *file, char __user *buffer, size_t length, loff_t *offset)
 {
   int i;
   channel *currentChannel;
@@ -168,6 +167,7 @@ static int __init simple_init(void)
   for(i=0; i<=256; i++){
     massageSlotsDeviceFilesList[i].first = NULL;
   }
+  printf("!!!");
     return SUCCESS;
 }
 
