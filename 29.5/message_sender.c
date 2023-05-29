@@ -8,11 +8,12 @@
 #include "message_slot.h"
 
 int main(int argc, char const *argv[]) {
+    int file;
     if (argc != 4){
         perror("wrong anount of args");
         exit(1);
     }
-    int file = open(argv[1], O_WRONLY);
+    file = open(argv[1], O_WRONLY);
     if (file == -1){
         perror("opening file failed");
         exit(1);
