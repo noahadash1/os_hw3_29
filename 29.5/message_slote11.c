@@ -29,14 +29,14 @@ static ssize_t device_read( struct file *file,
                            char __user *buffer,
                            size_t length,
                            loff_t *offset){
-    channelNode* cur_channel;
+    channel* cur_channel;
     int i, minor_num;
     if (buffer == NULL){
         printk("Buffer pointer is NULL\n");
         return -EINVAL;
     }
     minor_num = iminor(file->f_inode);
-    cur_channel = (channelNode *)file->private_data;
+    cur_channel = (channel *)file->private_data;
     if (cur_channel == NULL){
         printk("No channel has been set for this file descriptor of minor %d\n", minor_num);
         return -EINVAL;
