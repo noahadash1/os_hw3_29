@@ -31,7 +31,7 @@ static int device_open( struct inode* inode,
 static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsigned long ioctl_param ){
     int curChannelMinorNum; 
     channel *channelPointer;
-    channel *channelPointer tmp;
+    channel *tmp;
     int i;
 
     //If the passed command is not MSG_SLOT_CHANNEL, the ioctl() returns -1 and errno is set to EINVAL.
@@ -70,7 +70,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
       channelPointer->mesLen = 0;
       channelPointer->next = NULL;
     }
-    channelPointer tmp = massageSlotsDeviceFilesList[curChannelMinorNum].first;
+    tmp = massageSlotsDeviceFilesList[curChannelMinorNum].first;
     massageSlotsDeviceFilesList[curChannelMinorNum].first = channelPointer;
     channelPointer->next = tmp;
     return SUCCESS;
@@ -130,7 +130,6 @@ static ssize_t device_read( struct file* file, char __user* buffer, size_t lengt
   if(buffer == NULL){
     return -EINVAL;
   }
-  int i;
   for(i = 0; i < currentChannel->mesLen; i++){
     if (put_user(currentChannel->messageString[i], &buffer[i]) != 0){
       return -EINVAL;
