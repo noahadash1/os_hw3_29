@@ -22,9 +22,9 @@ int main(int argc, char const *argv[]) {
         exit(1);
     }
     int msLen = strlen(argv[3]);
-    printk("You entered: %d \n", msLen);
+    printf("You entered: %d \n", msLen);
     int r = write(file, argv[3], msLen);
-    printk("write result: %d \n", r);
+    printf("write result: %d \n", r);
     if(write(file, argv[3], msLen) != msLen){
        perror("writting message failed");
        exit(1);  
