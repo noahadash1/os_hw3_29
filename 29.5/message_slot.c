@@ -77,6 +77,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
 //---------------------------------------------------------------
 static ssize_t device_write(struct file *file, const char __user *buffer, size_t length, loff_t *offset)
 {
+  printk("im hererereerere \n");
   channel *currentChannel = (channel *)file->private_data;
   char mid_message[BUF_LEN];
   ssize_t i, j;
