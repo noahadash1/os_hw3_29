@@ -188,6 +188,7 @@ static void __exit simple_cleanup(void)
       kfree(tmp);
     }
   }
+  unregister_chrdev(MAJOR_NUM, DEVICE_RANGE_NAME);
 }
 
 //---------------------------------------------------------------
