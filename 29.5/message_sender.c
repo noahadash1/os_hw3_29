@@ -22,7 +22,7 @@ int main(int argc, char const *argv[]) {
         exit(1);
     }
     int msLen = strlen(argv[3]);
-    write(file, argv[3], msLen) 
+    write(file, argv[3], msLen);
     //if(write(file, argv[3], msLen) != msLen){
     //    perror("writting message failed");
     //    exit(1);  
