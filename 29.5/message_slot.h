@@ -1,11 +1,3 @@
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-
 #ifndef MESSAGE_SLOT_H
 #define MESSAGE_SLOT_H
 
