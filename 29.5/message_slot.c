@@ -24,6 +24,7 @@ static channelList massageSlotsDeviceFilesList[257]; //256 + one for the end of 
 static int device_open( struct inode* inode,
                         struct file*  file )
 {
+  printf(":)");
   return SUCCESS;
 }
 
