@@ -16,7 +16,6 @@
 MODULE_LICENSE("GPL");
 
 #include "message_slot.h"
-#include <stdio.h>
 static channelList massageSlotsDeviceFilesList[257]; //256 + one for the end of the array sing 
 
 //================== DEVICE FUNCTIONS ===========================
