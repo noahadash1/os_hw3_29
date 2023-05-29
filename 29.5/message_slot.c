@@ -31,7 +31,8 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     channel *channelPointer;
     channel *tmp;
     int i;
-
+  
+  printk("start");
     //If the passed command is not MSG_SLOT_CHANNEL, the ioctl() returns -1 and errno is set to EINVAL.
     if(ioctl_command_id != MSG_SLOT_CHANNEL){
         return -EINVAL;
@@ -71,6 +72,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     tmp = massageSlotsDeviceFilesList[curChannelMinorNum].first;
     massageSlotsDeviceFilesList[curChannelMinorNum].first = channelPointer;
     channelPointer->next = tmp;
+  printk("end");
     return SUCCESS;
 }
 
