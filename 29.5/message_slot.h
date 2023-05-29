@@ -12,7 +12,7 @@
 #define DEVICE_FILE_NAME "simple_char_dev"
 #define SUCCESS 0
 
-#endif
+
 
 typedef struct channel
 {
@@ -27,3 +27,5 @@ typedef struct channelList
 {
     channel *first;
 } channelList;
+
+#endif
