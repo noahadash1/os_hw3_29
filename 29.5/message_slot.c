@@ -77,10 +77,11 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
 //---------------------------------------------------------------
 static ssize_t device_write(struct file *file, const char __user *buffer, size_t length, loff_t *offset)
 {
-  channel* currentChannel = (channel *)file->private_data;
+  channel* currentChannel; 
   char mid_message[BUF_LEN];
   ssize_t i, j;
   //If no channel has been set on the file descriptor
+  currentChannel = (channel *)file->private_data;
   if(currentChannel == NULL){
     printk("im hererereerere 11\n");
     return -EINVAL;
