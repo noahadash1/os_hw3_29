@@ -63,7 +63,7 @@ static ssize_t device_write( struct file *file,
                             const char __user *buffer,
                             size_t length,
                             loff_t *offset){
-    channelNode* cur_channel;
+    channel* cur_channel;
     int i, minor_num;
     char temp_message[BUF_LEN];
     if (buffer == NULL){
