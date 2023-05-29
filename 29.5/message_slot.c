@@ -1,3 +1,10 @@
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 // Declare what kind of code we want
 // from the header files. Defining __KERNEL__
 // and MODULE allows us to access kernel-level
