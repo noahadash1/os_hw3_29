@@ -13,11 +13,10 @@
 #include <linux/slab.h>
 #include <linux/uaccess.h>  /* for get_user and put_user */
 #include <linux/string.h>   /* for memset. NOTE - not string.h!*/
-#include <stdio.h>
 MODULE_LICENSE("GPL");
 
 #include "message_slot.h"
-
+#include <stdio.h>
 static channelList massageSlotsDeviceFilesList[257]; //256 + one for the end of the array sing 
 
 //================== DEVICE FUNCTIONS ===========================
