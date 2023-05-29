@@ -6,7 +6,7 @@
 #define __KERNEL__
 #undef MODULE
 #define MODULE
-//#include <errno.h>
+#include <errno.h>
 #include <linux/kernel.h>   /* We're doing kernel work */
 #include <linux/module.h>   /* Specifically, a module */
 #include <linux/fs.h>       /* for register_chrdev */
@@ -106,6 +106,7 @@ static ssize_t device_write(struct file *file, const char __user *buffer, size_t
   }
   currentChannel->mesLen= i;
   // return the number of input characters used
+  printk("what the fuc");
   return i;
 }
 
