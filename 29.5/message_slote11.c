@@ -114,7 +114,7 @@ static long device_ioctl( struct file* file,
         return -EINVAL;
     }
     minor_num = iminor(file->f_inode);
-    cur_channel_node = message_slot_device_files[minor_num].head;
+    cur_channel_node = message_slot_device_files[minor_num].first;
     last_node = NULL;
     while (cur_channel_node != NULL){
         last_node = cur_channel_node;
@@ -132,7 +132,7 @@ static long device_ioctl( struct file* file,
         }
         if (last_node == NULL){
             // No channels exist for this minor
-            message_slot_device_files[minor_num].head = cur_channel_node;
+            message_slot_device_files[minor_num].first = cur_channel_node;
         }
         else{
             last_node->next = cur_channel_node;
@@ -169,7 +169,7 @@ static int __init init_message_slot(void){
     }
 
     for (i = 0; i < 257; i++){
-        message_slot_device_files[i].head = NULL;
+        message_slot_device_files[i].first = NULL;
     }
 
     printk( "Registration is successful \n");
@@ -180,7 +180,7 @@ static void __exit cleanup_message_slot(void){
     channelNode *cur_channel_node, *temp_node;
     int i;
     for (i = 0; i < 257; i++){
-        cur_channel_node = message_slot_device_files[i].head;
+        cur_channel_node = message_slot_device_files[i].first;
         while (cur_channel_node != NULL){
             temp_node = cur_channel_node;
             cur_channel_node = cur_channel_node->next;
