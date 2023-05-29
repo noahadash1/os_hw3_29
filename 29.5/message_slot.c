@@ -60,6 +60,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     }
     // there is no channel with the specified minorNumber
     if(i == 1){
+      printk("middle");
       channelPointer = (channel *)kmalloc(sizeof(channel), GFP_KERNEL);
       // failing to allocate memory
       if (channelPointer == NULL) {
