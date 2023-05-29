@@ -21,7 +21,7 @@ static channelList massageSlotsDeviceFilesList[257]; //256 + one for the end of 
 //================== DEVICE FUNCTIONS ===========================
 static int device_open( struct inode *inode, struct file *file )
 {
-  printf(":)");
+  printk(":)");
   return SUCCESS;
 }
 
@@ -165,7 +165,7 @@ static int __init simple_init(void)
   for(i=0; i<=256; i++){
     massageSlotsDeviceFilesList[i].first = NULL;
   }
-  printf("!!!");
+  printk("!!!");
     return SUCCESS;
 }
 
