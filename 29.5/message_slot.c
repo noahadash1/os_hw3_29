@@ -49,29 +49,22 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
   }
   // there is no channel with this ID
   if(channelPointer == NULL){
-    printk("middle");
     channelPointer = (channel *)kmalloc(sizeof(channel), GFP_KERNEL);
     // failing to allocate memory
     if (channelPointer == NULL) {
-      printk("1 after middle");
       return -EINVAL;
     }
-    printk("2 after middle");
     if (tmp == NULL) {
-      printk("3 after middle");
       massageSlotsDeviceFilesList[curChannelMinorNum].first = channelPointer;
     }
     else {
-      printk("5 after middle");
       tmp->next = channelPointer;
     }
-    printk("middle2");
     channelPointer->ID = ioctl_param;
     channelPointer->mesLen = 0;
     channelPointer->next = NULL;
   }
   file->private_data = channelPointer;
-  printk("end");
   return SUCCESS;
 }
 
@@ -96,7 +89,6 @@ static ssize_t device_write(struct file *file, const char __user *buffer, size_t
   printk("Invoking device_write(%p,%ld)\n", file, length);
   for( i = 0; i < length && i < BUF_LEN; ++i ) {
     if(get_user(mid_message[i], &buffer[i]) != 0) {
-      printk("im hererereerere 4\n");
       return -EINVAL;
     }
   }
@@ -113,43 +105,29 @@ static ssize_t device_write(struct file *file, const char __user *buffer, size_t
 // the device file attempts to read from it
 static ssize_t device_read( struct file *file, char __user *buffer, size_t length, loff_t *offset)
 {
-  printk("hihihi");
   int i;
   channel *currentChannel;
-  printk("hellloooo");
   currentChannel  = (channel *)file->private_data;
-  printk("goodbbbb");
   //If no channel has been set on the file descriptor
   if(currentChannel == NULL){
-    printk(" read 1");
     return -EINVAL;
   }
-  printk("read after 1");
   //If no message exists on the channel
   if(currentChannel->mesLen == 0){
-    printk(" read 2");
     return -EWOULDBLOCK;
   }
-  printk("read after 2");
   //If the provided buffer length is too small to hold the last message written on the channel
   if(currentChannel->mesLen > length){
-    printk(" read 3");
     return -ENOSPC;
   }
-  printk("read after 3");
   if(buffer == NULL){
-    printk(" read 4");
     return -EINVAL;
   }
-  printk("read after 4");
   for(i = 0; i < currentChannel->mesLen; i++){
-    printk(" read 5");
     if (put_user(currentChannel->messageString[i], &buffer[i]) != 0){
       return -EINVAL;
     }
   }
-  printk("read after 5");
-  printk("len is %d", currentChannel->mesLen);
   return currentChannel->mesLen;
 }
 
@@ -182,7 +160,6 @@ static int __init simple_init(void)
   for(i=0; i<=256; i++){
     massageSlotsDeviceFilesList[i].first = NULL;
   }
-  printk("end of init");
   return SUCCESS;
 }
 
