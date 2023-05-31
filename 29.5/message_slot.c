@@ -111,7 +111,9 @@ static ssize_t device_read( struct file *file, char __user *buffer, size_t lengt
   printk("hihihi");
   int i;
   channel *currentChannel;
+  printk("hellloooo");
   currentChannel  = (channel *)file->private_data;
+  printk("goodbbbb");
   //If no channel has been set on the file descriptor
   if(currentChannel == NULL){
     printk(" read 1");
