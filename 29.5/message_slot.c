@@ -30,7 +30,6 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
   channel *channelPointer;
   channel *tmp;
   int i;
-  printk("start");
   //If the passed command is not MSG_SLOT_CHANNEL, the ioctl() returns -1 and errno is set to EINVAL.
   if(ioctl_command_id != MSG_SLOT_CHANNEL){
     return -EINVAL;
@@ -68,6 +67,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     channelPointer->next = NULL;
   }
   file->private_data = channelPointer;
+  printk("end");
   return SUCCESS;
 }
 
@@ -80,16 +80,13 @@ static ssize_t device_write(struct file *file, const char __user *buffer, size_t
   //If no channel has been set on the file descriptor
   currentChannel = (channel *)file->private_data;
   if(currentChannel == NULL){
-    printk("im hererereerere 11\n");
     return -EINVAL;
   }
   //If the passed message length is 0 or more than 128
   if(length == 0 || length > 128){
-    printk("im hererereerere 2\n");
     return -EMSGSIZE;
   }
   if(buffer == NULL){
-    printk("im hererereerere 3\n");
     return -EINVAL;
   }
   printk("Invoking device_write(%p,%ld)\n", file, length);
@@ -104,7 +101,6 @@ static ssize_t device_write(struct file *file, const char __user *buffer, size_t
   }
   currentChannel->mesLen= i;
   // return the number of input characters used
-  printk("what the fuc");
   return i;
 }
 
@@ -168,7 +164,6 @@ static int __init simple_init(void)
   for(i=0; i<=256; i++){
     massageSlotsDeviceFilesList[i].first = NULL;
   }
-  printk("!!!");
     return SUCCESS;
 }
 
