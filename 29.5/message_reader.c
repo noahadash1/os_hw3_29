@@ -8,6 +8,7 @@
 #include "message_slot.h"
 
 int main(int argc, char const *argv[]) {
+    int id;
     printf("start of reader");
     if (argc != 3){
         perror("wrong anount of args");
@@ -18,7 +19,8 @@ int main(int argc, char const *argv[]) {
         perror("opening file failed");
         exit(1);
     }
-    if (ioctl(file, MSG_SLOT_CHANNEL, argv[2]) < 0){
+    id = atoi(argv[2]);
+    if (ioctl(file, MSG_SLOT_CHANNEL, id) < 0){
         perror("setting channel id failed");
         exit(1);
     }
