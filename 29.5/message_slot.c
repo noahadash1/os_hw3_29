@@ -42,18 +42,12 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
   curChannelMinorNum = iminor(file->f_inode);
   channelPointer = massageSlotsDeviceFilesList[curChannelMinorNum].first;
   i = 0;
-  while (i == 0){
-    if (channelPointer == NULL){
-      i = 1;
-    }
-    else {
-      if(channelPointer->minorNumber == ioctl_param){
-        i = 2;
+  while(channelPointer != NULL) {
+    tmp = channelPointer;
+    if(channelPointer->minorNumber == ioctl_param){
+        break;
       }
-      else {
-        channelPointer = channelPointer->next;
-      }
-    }
+    channelPointer = channelPointer->next;
   }
   // there is no channel with the specified minorNumber
   if(i == 1){
