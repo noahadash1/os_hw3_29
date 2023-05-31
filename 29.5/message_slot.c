@@ -47,7 +47,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
       i = 1;
     }
     else {
-      if(channelPointer->minorNumber == curChannelMinorNum){
+      if(channelPointer->minorNumber == ioctl_param){
         i = 2;
       }
       else {
