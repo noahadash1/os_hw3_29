@@ -43,29 +43,31 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
   channelPointer = massageSlotsDeviceFilesList[curChannelMinorNum].first;
   i = 0;
   while(channelPointer != NULL) {
-    tmp = channelPointer;
-    if(channelPointer->minorNumber == ioctl_param){
+    if(channelPointer->ID == ioctl_param){
         break;
       }
+    tmp = channelPointer;
     channelPointer = channelPointer->next;
   }
-  // there is no channel with the specified minorNumber
-  if(i == 1){
+  // there is no channel with this ID
+  if(channelPointer == NULL){
     printk("middle");
     channelPointer = (channel *)kmalloc(sizeof(channel), GFP_KERNEL);
     // failing to allocate memory
     if (channelPointer == NULL) {
       return -EINVAL;
     }
-    channelPointer->minorNumber = ioctl_param;
+    if (tmp == NULL) {
+      massageSlotsDeviceFilesList[curChannelMinorNum].first = channelPointer;
+    }
+    else {
+      tmp->next = channelPointer;
+    }
+    channelPointer->ID = ioctl_param;
     channelPointer->mesLen = 0;
     channelPointer->next = NULL;
   }
-  tmp = massageSlotsDeviceFilesList[curChannelMinorNum].first;
-  massageSlotsDeviceFilesList[curChannelMinorNum].first = channelPointer;
-  channelPointer->next = tmp;
   file->private_data = channelPointer;
-  printk("end");
   return SUCCESS;
 }
 
