@@ -8,7 +8,7 @@
 #include "message_slot.h"
 
 int main(int argc, char const *argv[]) {
-    int file;
+    int file, msLen, r;
     if (argc != 4){
         perror("wrong anount of args");
         exit(1);
@@ -23,8 +23,8 @@ int main(int argc, char const *argv[]) {
         exit(1);
     }
     printf("almost there");
-    int msLen = strlen(argv[3]);
-    int r = write(file, argv[3], msLen);
+    msLen = strlen(argv[3]);
+    r = write(file, argv[3], msLen);
     if(write(file, argv[3], msLen) != msLen){
         perror("writting message failed");
         exit(1);  
