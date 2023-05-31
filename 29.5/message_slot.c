@@ -37,6 +37,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
   if(ioctl_param == 0){
     return -EINVAL;
   }
+  tmp = NULL;
   curChannelMinorNum = iminor(file->f_inode);
   channelPointer = massageSlotsDeviceFilesList[curChannelMinorNum].first;
   while(channelPointer != NULL) {
