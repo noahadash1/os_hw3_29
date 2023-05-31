@@ -162,7 +162,8 @@ static int __init simple_init(void)
   for(i=0; i<=256; i++){
     massageSlotsDeviceFilesList[i].first = NULL;
   }
-    return SUCCESS;
+  printk("end of init");
+  return SUCCESS;
 }
 
 //---------------------------------------------------------------
