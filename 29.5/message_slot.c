@@ -60,6 +60,7 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     else {
       tmp->next = channelPointer;
     }
+    printk("middle2");
     channelPointer->ID = ioctl_param;
     channelPointer->mesLen = 0;
     channelPointer->next = NULL;
