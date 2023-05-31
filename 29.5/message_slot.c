@@ -38,7 +38,15 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     return -EINVAL;
   }
   curChannelMinorNum = iminor(file->f_inode);
-  printk("curChannelMinorNum= %d", curChannelMinorNum);
+  if(curChannelMinorNum == 4){
+    printk("it is 4");
+  }
+  if(curChannelMinorNum > 4){
+    printk("it is bigger then 4");
+  }
+  if(curChannelMinorNum < 4){
+    printk("it is smaller then 4");
+  }
   channelPointer = massageSlotsDeviceFilesList[curChannelMinorNum].first;
   while(channelPointer != NULL) {
     if(channelPointer->ID == ioctl_param){
