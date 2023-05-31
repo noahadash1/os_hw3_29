@@ -111,13 +111,10 @@ static ssize_t device_read( struct file *file, char __user *buffer, size_t lengt
   printk("hihihi");
   int i;
   channel *currentChannel;
-  if (file==NULL){
-      printk("YEP");
-  }
   currentChannel  = (channel *)file->private_data;
   //If no channel has been set on the file descriptor
   if(currentChannel == NULL){
-      printk(" read 1");
+    printk(" read 1");
     return -EINVAL;
   }
   //If no message exists on the channel
@@ -140,7 +137,8 @@ static ssize_t device_read( struct file *file, char __user *buffer, size_t lengt
       return -EINVAL;
     }
   }
-    return currentChannel->mesLen;
+  printk("len is %d", currentChannel->mesLen);
+  return currentChannel->mesLen;
 }
 
 //==================== DEVICE SETUP =============================
