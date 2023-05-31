@@ -9,7 +9,6 @@
 
 int main(int argc, char const *argv[]) {
     int id;
-    printf("start of reader");
     if (argc != 3){
         perror("wrong anount of args");
         exit(1);
@@ -35,6 +34,5 @@ int main(int argc, char const *argv[]) {
         perror("writting the massage to stdout faild");
         exit(1);
     }
-    printf("end of reader");
     exit(0);
 }
