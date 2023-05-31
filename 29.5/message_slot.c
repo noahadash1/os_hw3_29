@@ -41,15 +41,6 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
   if (curChannelMinorNum == NULL){
     printk("it is Null");
   }
-//   if(curChannelMinorNum == 4){
-//     printk("it is 4");
-//   }
-//   if(curChannelMinorNum > 4){
-//     printk("it is bigger then 4");
-//   }
-//   if(curChannelMinorNum < 4){
-//     printk("it is smaller then 4");
-//   }
   channelPointer = massageSlotsDeviceFilesList[curChannelMinorNum].first;
   while(channelPointer != NULL) {
     if(channelPointer->ID == ioctl_param){
@@ -64,12 +55,17 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     channelPointer = (channel *)kmalloc(sizeof(channel), GFP_KERNEL);
     // failing to allocate memory
     if (channelPointer == NULL) {
+      printk("1 after middle");
       return -EINVAL;
     }
+    printk("2 after middle");
     if (tmp == NULL) {
+      printk("3 after middle");
       massageSlotsDeviceFilesList[curChannelMinorNum].first = channelPointer;
     }
+    printk("4 after middle");
     else {
+      printk("5 after middle");
       tmp->next = channelPointer;
     }
     printk("middle2");
