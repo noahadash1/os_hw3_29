@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
         perror("writting message failed");
         exit(1);  
    }
-    pritf("end of sender");
+    printf("end of sender");
     close(file);
     exit(0);
 }
