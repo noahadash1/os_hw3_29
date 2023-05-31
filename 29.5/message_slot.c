@@ -119,26 +119,31 @@ static ssize_t device_read( struct file *file, char __user *buffer, size_t lengt
     printk(" read 1");
     return -EINVAL;
   }
+  printk("read after 1");
   //If no message exists on the channel
   if(currentChannel->mesLen == 0){
     printk(" read 2");
     return -EWOULDBLOCK;
   }
+  printk("read after 2");
   //If the provided buffer length is too small to hold the last message written on the channel
   if(currentChannel->mesLen > length){
     printk(" read 3");
     return -ENOSPC;
   }
+  printk("read after 3");
   if(buffer == NULL){
     printk(" read 4");
     return -EINVAL;
   }
+  printk("read after 4");
   for(i = 0; i < currentChannel->mesLen; i++){
     printk(" read 5");
     if (put_user(currentChannel->messageString[i], &buffer[i]) != 0){
       return -EINVAL;
     }
   }
+  printk("read after 5");
   printk("len is %d", currentChannel->mesLen);
   return currentChannel->mesLen;
 }
