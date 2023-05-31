@@ -63,7 +63,6 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
       printk("3 after middle");
       massageSlotsDeviceFilesList[curChannelMinorNum].first = channelPointer;
     }
-    printk("4 after middle");
     else {
       printk("5 after middle");
       tmp->next = channelPointer;
