@@ -93,7 +93,7 @@ static ssize_t device_write(struct file *file, const char __user *buffer, size_t
     if(get_user(mid_message[i], &buffer[i]) != 0) {
       printk("im hererereerere 4\n");
       return -EINVAL;
-    };
+    }
   }
   for(j = 0; j<i; ++j){
     currentChannel->messageString[j] = mid_message[j];
