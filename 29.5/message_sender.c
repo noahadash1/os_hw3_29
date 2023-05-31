@@ -9,7 +9,7 @@
 
 int main(int argc, char const *argv[]) {
     printf("start of sender");
-    int file, msLen;
+    int file, msLen, id;
     if (argc != 4){
         perror("wrong anount of args");
         exit(1);
@@ -20,7 +20,8 @@ int main(int argc, char const *argv[]) {
         exit(1);
     }
     printf("mid of sender");
-    if (ioctl(file, MSG_SLOT_CHANNEL, argv[2]) < 0){
+    id = atoi(argv[2]);
+    if (ioctl(file, MSG_SLOT_CHANNEL, id) < 0){
         perror("setting channel id failed");
         exit(1);
     }
