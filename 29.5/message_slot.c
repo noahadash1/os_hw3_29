@@ -108,8 +108,12 @@ static ssize_t device_write(struct file *file, const char __user *buffer, size_t
 // the device file attempts to read from it
 static ssize_t device_read( struct file *file, char __user *buffer, size_t length, loff_t *offset)
 {
+  printk("hihihi");
   int i;
   channel *currentChannel;
+  if (file==NULL){
+      printk("YEP");
+  }
   currentChannel  = (channel *)file->private_data;
   //If no channel has been set on the file descriptor
   if(currentChannel == NULL){
