@@ -22,12 +22,14 @@ int main(int argc, char const *argv[]) {
         perror("setting channel id failed");
         exit(1);
     }
+    printf("almost there");
     int msLen = strlen(argv[3]);
     int r = write(file, argv[3], msLen);
     if(write(file, argv[3], msLen) != msLen){
-       perror("writting message failed");
-       exit(1);  
+        perror("writting message failed");
+        exit(1);  
    }
+    pritf("end of sender");
     close(file);
     exit(0);
 }
