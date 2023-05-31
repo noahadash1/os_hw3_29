@@ -113,20 +113,25 @@ static ssize_t device_read( struct file *file, char __user *buffer, size_t lengt
   currentChannel  = (channel *)file->private_data;
   //If no channel has been set on the file descriptor
   if(currentChannel == NULL){
+      printk(" read 1");
     return -EINVAL;
   }
   //If no message exists on the channel
   if(currentChannel->mesLen == 0){
+    printk(" read 2");
     return -EWOULDBLOCK;
   }
   //If the provided buffer length is too small to hold the last message written on the channel
   if(currentChannel->mesLen > length){
+    printk(" read 3");
     return -ENOSPC;
   }
   if(buffer == NULL){
+    printk(" read 4");
     return -EINVAL;
   }
   for(i = 0; i < currentChannel->mesLen; i++){
+    printk(" read 5");
     if (put_user(currentChannel->messageString[i], &buffer[i]) != 0){
       return -EINVAL;
     }
