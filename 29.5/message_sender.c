@@ -8,7 +8,6 @@
 #include "message_slot.h"
 
 int main(int argc, char const *argv[]) {
-    printf("start of sender");
     int file, msLen, id;
     if (argc != 4){
         perror("wrong anount of args");
@@ -19,19 +18,16 @@ int main(int argc, char const *argv[]) {
         perror("opening file failed");
         exit(1);
     }
-    printf("mid of sender");
     id = atoi(argv[2]);
     if (ioctl(file, MSG_SLOT_CHANNEL, id) < 0){
         perror("setting channel id failed");
         exit(1);
     }
-    printf("almost there");
     msLen = strlen(argv[3]);
     if(write(file, argv[3], msLen) != msLen){
         perror("writting message failed");
         exit(1);  
    }
-    printf("end of sender");
     close(file);
     exit(0);
 }
