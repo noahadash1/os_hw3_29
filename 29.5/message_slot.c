@@ -38,6 +38,9 @@ static long device_ioctl( struct file* file, unsigned int ioctl_command_id, unsi
     return -EINVAL;
   }
   curChannelMinorNum = iminor(file->f_inode);
+  if (curChannelMinorNum == NULL){
+    printk("it is Null");
+  }
   if(curChannelMinorNum == 4){
     printk("it is 4");
   }
